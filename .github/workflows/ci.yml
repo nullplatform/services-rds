@@ -16,7 +16,7 @@ jobs:
       - name: Install nullplatform cli
         run: curl https://cli.nullplatform.com/install.sh | sh
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Start nullplatform CI
         run: np build start
       - name: Build asset
