@@ -3,12 +3,6 @@ variable "nrn" {
   type        = string
 }
 
-variable "np_api_key" {
-  description = "nullplatform API key used by the agent association to authenticate against the nullplatform API."
-  type        = string
-  sensitive   = true
-}
-
 variable "tags_selectors" {
   description = "Agent tag selectors for the notification channel (must match the tags the target agent registers with)."
   type        = map(string)

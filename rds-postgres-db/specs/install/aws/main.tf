@@ -6,6 +6,11 @@
 # AWS AssumeRole IAM role/policies live in ../../requirements/aws and are
 # applied separately (see that module's README and the top-level
 # "AssumeRole Setup Guide" in ../../../README.md).
+#
+# The agent association takes no API key: nullplatform creates and manages the
+# notification channel's credential, scoped to dispatching commands to agents.
+# The identity running the apply must be able to assign the
+# controlplane:agent-dispatcher role (admin, ops or secops).
 ################################################################################
 
 locals {
@@ -29,12 +34,11 @@ module "service_definition" {
 }
 
 module "service_definition_agent_association" {
-  source = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/service_definition_agent_association?ref=v4.5.1"
+  source = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/service_definition_agent_association?ref=v8.7.0"
 
   nrn                          = var.nrn
   repository_service_spec_repo = "${var.repository_org}/${var.repository_name}"
   service_path                 = local.service_path
   service_specification_slug   = module.service_definition.service_specification_slug
-  api_key                      = var.np_api_key
   tags_selectors               = var.tags_selectors
 }
